@@ -104,7 +104,7 @@ The model successfully detected a broad range of safety-critical objects, includ
 These clean-image detections serve as the experimental reference for the selected images. All later degradation is measured relative to the objects detected by the same pretrained model on the corresponding clean images. In this context, the baseline detections are used as a reference set rather than as manually annotated ground-truth labels.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/01_baseline_detections_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/01_baseline_detections_clean.png" width="1000">
 </p>
 
 <p align="center"><em>YOLOv8 detections on the five clean BDD100K test images.</em></p>
@@ -130,7 +130,7 @@ The following figure shows the five clean test images under the selected low-lig
 At `b = -0.7` and `b = -0.8`, most of the visible signal is lost. Vehicles and background elements merge into dark silhouettes, producing a difficult feature-extraction problem for the detector.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/02_low_light_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/02_low_light_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Low-light distortion sweep without model inference.</em></p>
@@ -140,7 +140,7 @@ At `b = -0.7` and `b = -0.8`, most of the visible signal is lost. Vehicles and b
 The following figure presents the detections produced by YOLOv8 at the different low-light levels.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/03_low_light_yolov8_results_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/03_low_light_yolov8_results_clean.png" width="1000">
 </p>
 
 <p align="center"><em>YOLOv8 detections under increasing low-light distortion.</em></p>
@@ -164,7 +164,7 @@ Under stronger low-light distortion, the model may not only miss objects but als
 A clear example appears in the parking-lot scene. In the clean image, the foreground sport utility vehicle is correctly classified as a `car`. Under stronger attenuation, the internal visual details disappear while the dark, box-shaped silhouette and rear spare wheel remain visible. YOLOv8 then reclassifies the same vehicle as a `truck`.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/04_low_light_misclassification_example_clean.png" width="900">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/04_low_light_misclassification_example_clean.png" width="900">
 </p>
 
 <p align="center"><em>Example of a low-light-induced misclassification from car to truck.</em></p>
@@ -178,7 +178,7 @@ For the low-light experiment, the decrease in the signal-to-noise ratio does not
 To quantify the degradation, the mean detection recall was measured relative to the clean-image baseline detections. The horizontal axis presents the signal-to-noise ratio in decibels, while the vertical axis presents the fraction of baseline objects successfully recovered by the model.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/05_low_light_recall_vs_snr_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/05_low_light_recall_vs_snr_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean detection recall as a function of SNR under low-light degradation.</em></p>
@@ -215,7 +215,7 @@ The intended purpose of this pipeline was to reconstruct local intensity differe
 The following figure compares clean images, images distorted at `b = -0.3`, and the corresponding enhanced images.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/06_gamma_clahe_visual_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/06_gamma_clahe_visual_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Clean, distorted, and Gamma-plus-CLAHE-enhanced detection results.</em></p>
@@ -225,7 +225,7 @@ The enhancement creates a clear trade-off. It restores brightness and local cont
 The parking-lot scene illustrates this behavior particularly well.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/07_gamma_clahe_case_study_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/07_gamma_clahe_case_study_clean.png" width="750">
 </p>
 
 <p align="center"><em>Case study of the clean, distorted, and enhanced parking-lot scene.</em></p>
@@ -247,7 +247,7 @@ The enhancement therefore corrects one important foreground classification but d
 The following graph compares the raw low-light images with the Gamma-plus-CLAHE-enhanced images. The red curve represents YOLOv8 performance on the distorted images, while the green curve represents performance after enhancement. The dashed horizontal line represents the clean baseline.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/08_classical_enhancement_recall_comparison_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/08_classical_enhancement_recall_comparison_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean detection recall before and after adaptive low-light enhancement.</em></p>
@@ -285,7 +285,7 @@ The following graph compares three approaches:
 - **Purple curve:** the fine-tuned YOLOv8 model evaluated directly on distorted images.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/09_fine_tuned_model_comparison_clean.png" width="900">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/09_fine_tuned_model_comparison_clean.png" width="900">
 </p>
 
 <p align="center"><em>Comparison of the original, classically enhanced, and fine-tuned YOLOv8 approaches.</em></p>
@@ -303,7 +303,7 @@ The fine-tuned model is not completely invariant to darkness. At the most severe
 The following bar chart summarizes the approaches at the critical distortion level `b = -0.5`.
 
 <p align="center">
-  <img src="images/task1_yolov8/low_light_clean/10_low_light_final_performance_comparison_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/low_light_clean/10_low_light_final_performance_comparison_clean.png" width="750">
 </p>
 
 <p align="center"><em>YOLOv8 performance comparison at the critical low-light level b = -0.5.</em></p>
@@ -343,7 +343,7 @@ As the standard deviation increases, the random pixel variations become stronger
 The following figure presents the five selected test images under the different Gaussian-noise intensities.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Gaussian-noise distortion sweep without model inference.</em></p>
@@ -357,7 +357,7 @@ At `STD = 100` and `STD = 150`, the noise becomes dominant over much of the orig
 The following figure shows the detections produced by YOLOv8 across the Gaussian-noise sweep.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/02_yolov8_gaussian_noise_detections_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/02_yolov8_gaussian_noise_detections_clean.png" width="1000">
 </p>
 
 <p align="center"><em>YOLOv8 detections under increasing Gaussian-noise intensity.</em></p>
@@ -379,7 +379,7 @@ At intermediate noise levels, corrupted textures may create a coarse pattern tha
 The following sequence illustrates this progression in a highway scene.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/03_gaussian_noise_misclassification_sequence_clean.png" width="950">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/03_gaussian_noise_misclassification_sequence_clean.png" width="950">
 </p>
 
 <p align="center"><em>Progressive detection loss and misclassification in a highway scene.</em></p>
@@ -397,7 +397,7 @@ For this distortion, the decrease in SNR is caused by the active addition of dig
 The following graph presents mean detection recall relative to the clean-image baseline as a function of SNR. The red curve represents the original YOLOv8 model evaluated on the noisy images, while the dashed blue line represents the clean baseline.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/04_gaussian_noise_recall_vs_snr_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/04_gaussian_noise_recall_vs_snr_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean YOLOv8 detection recall as a function of SNR under Gaussian noise.</em></p>
@@ -421,7 +421,7 @@ The intended trade-off was to remove high-frequency pixel fluctuations without e
 The following graph compares the original noisy images with the bilaterally filtered images. The red curve represents the distorted inputs, the green curve represents the enhanced inputs, and the dashed blue line represents the clean baseline.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/05_bilateral_filter_recall_comparison_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/05_bilateral_filter_recall_comparison_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean detection recall before and after bilateral denoising.</em></p>
@@ -459,7 +459,7 @@ The following graph compares:
 - **Purple curve:** the fine-tuned noise-robust model evaluated directly on noisy images.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/06_fine_tuned_gaussian_noise_comparison_clean.png" width="900">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/06_fine_tuned_gaussian_noise_comparison_clean.png" width="900">
 </p>
 
 <p align="center"><em>Comparison of the original, bilaterally filtered, and fine-tuned models under Gaussian noise.</em></p>
@@ -477,7 +477,7 @@ The results show that fine-tuning changes the model's feature space rather than 
 The following bar chart summarizes the three approaches at `STD = 60`, a representative high-noise operating point.
 
 <p align="center">
-  <img src="images/task1_yolov8/gaussian_noise_clean/07_gaussian_noise_final_bar_chart_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/gaussian_noise_clean/07_gaussian_noise_final_bar_chart_clean.png" width="750">
 </p>
 
 <p align="center"><em>YOLOv8 performance comparison at STD = 60.</em></p>
@@ -519,7 +519,7 @@ A lower quality value represents stronger compression and more severe informatio
 The following figure presents the five clean test images under the selected JPEG quality levels.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Severe JPEG-compression sweep without model inference.</em></p>
@@ -531,7 +531,7 @@ At `Q = 30`, the global scene remains visually recognizable, although fine textu
 The following figure presents YOLOv8 detections at each compression level.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/02_yolov8_jpeg_detections_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/02_yolov8_jpeg_detections_clean.png" width="1000">
 </p>
 
 <p align="center"><em>YOLOv8 detections under increasingly severe JPEG compression.</em></p>
@@ -553,7 +553,7 @@ Artificial block boundaries may appear as strong but false edges. A random conne
 The following sequence highlights this behavior in the parking-lot scene.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/03_jpeg_misclassification_sequence_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/03_jpeg_misclassification_sequence_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Progressive confidence loss and class instability under JPEG compression.</em></p>
@@ -573,7 +573,7 @@ For each quality level, the compressed images were compared with the clean image
 The following graph presents mean detection recall relative to the clean-image reference detections.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/04_jpeg_recall_vs_snr_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/04_jpeg_recall_vs_snr_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean YOLOv8 detection recall as JPEG compression becomes more severe.</em></p>
@@ -597,7 +597,7 @@ The objective was to use the bilateral filter as a de-blocking operator: artific
 The following graph compares the original compressed images with the bilaterally filtered images. The red curve represents the compressed inputs, the green curve represents the enhanced inputs, and the dashed blue line represents the clean reference level.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/05_bilateral_deblocking_comparison_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/05_bilateral_deblocking_comparison_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean detection recall before and after bilateral de-blocking.</em></p>
@@ -625,7 +625,7 @@ The following graph compares:
 - **Purple curve:** the fine-tuned compression-robust model on compressed images.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/06_fine_tuned_jpeg_comparison_clean.png" width="900">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/06_fine_tuned_jpeg_comparison_clean.png" width="900">
 </p>
 
 <p align="center"><em>Original, classically enhanced, and fine-tuned YOLOv8 performance under JPEG compression.</em></p>
@@ -641,7 +641,7 @@ Only at the extreme quality level `Q = 1` does the fine-tuned curve begin to dec
 The following grouped bar chart compares all three approaches at every tested quality level.
 
 <p align="center">
-  <img src="images/task1_yolov8/jpeg_clean/07_jpeg_final_grouped_bar_chart_clean.png" width="900">
+  <img src="computer_vision_robustness_github_package/images/task1_yolov8/jpeg_clean/07_jpeg_final_grouped_bar_chart_clean.png" width="900">
 </p>
 
 <p align="center"><em>Grouped comparison of YOLOv8 robustness across JPEG quality levels.</em></p>
@@ -678,7 +678,7 @@ To create a stable baseline, the raw model output was processed using two additi
 These steps are particularly important in instance segmentation. Without NMS, multiple masks may overlap the same vehicle. Without ego-vehicle filtering, the model may assign masks to parts of the host vehicle rather than to the external driving environment.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/baseline_clean/01_mask_rcnn_baseline_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/baseline_clean/01_mask_rcnn_baseline_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Mask R-CNN baseline results after NMS and ego-vehicle filtering.</em></p>
@@ -702,7 +702,7 @@ The low-light distortion was generated using controlled brightness offsets witho
 - `b = -0.8`
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/01_low_light_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/01_low_light_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Low-light distortion sweep used for the Mask R-CNN experiment.</em></p>
@@ -716,7 +716,7 @@ This distortion does not move the pixels or change the scene geometry. Instead, 
 The same inference pipeline, including the confidence threshold, NMS, and ego-vehicle filter, was applied at every low-light level.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/02_mask_rcnn_low_light_results_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/02_mask_rcnn_low_light_results_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Mask R-CNN instance masks under increasing darkness.</em></p>
@@ -741,7 +741,7 @@ The model is therefore almost unaffected by very mild darkness, but the degradat
 To evaluate whether the baseline instances were recovered spatially, a prediction was considered a match when its IoU with a clean-image reference prediction was greater than `0.5`.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/03_low_light_iou_recall_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/03_low_light_iou_recall_clean.png" width="850">
 </p>
 
 <p align="center"><em>IoU-matched instance recall under low-light degradation.</em></p>
@@ -764,7 +764,7 @@ The procedure was:
 The following graph compares the distorted images with the enhanced images. The red curve represents the unprocessed low-light inputs, and the green curve represents the adaptive enhancement pipeline.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/04_gamma_clahe_recall_comparison_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/04_gamma_clahe_recall_comparison_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mask-recall comparison before and after adaptive Gamma and CLAHE enhancement.</em></p>
@@ -778,7 +778,7 @@ Only at very severe darkness is a small benefit observed. Even then, recall rema
 The report also includes an exploratory experiment that blends the original distorted image and the fully enhanced image using different alpha values. This test examines whether a partial enhancement ratio can provide a better balance between recovering contrast and preserving natural texture.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/05_alpha_blending_exploration_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/05_alpha_blending_exploration_clean.png" width="850">
 </p>
 
 <p align="center"><em>Exploratory alpha-blending analysis at a severe low-light level.</em></p>
@@ -786,7 +786,7 @@ The report also includes an exploratory experiment that blends the original dist
 The associated visual inspection highlights a low-precision case in which the model produces a prediction in a poorly visible region.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/low_light_clean/06_low_light_visual_error_inspection_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/low_light_clean/06_low_light_visual_error_inspection_clean.png" width="750">
 </p>
 
 <p align="center"><em>Visual inspection of a low-light segmentation error.</em></p>
@@ -812,7 +812,7 @@ The tested standard deviations were:
 ### 7.6.1 Visual Distortion Sweep
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Gaussian-noise sweep used for Mask R-CNN evaluation.</em></p>
@@ -822,7 +822,7 @@ At `STD = 10`, the road structure and major objects remain clear. At `STD = 30` 
 ### 7.6.2 Mask R-CNN under Gaussian Noise
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/02_mask_rcnn_gaussian_results_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/02_mask_rcnn_gaussian_results_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Mask R-CNN predictions under increasing Gaussian noise.</em></p>
@@ -848,7 +848,7 @@ The standard definitions are:
 \]
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/03_recall_precision_definitions_clean.png" width="650">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/03_recall_precision_definitions_clean.png" width="650">
 </p>
 
 <p align="center"><em>Recall and precision definitions used in the Mask R-CNN analysis.</em></p>
@@ -856,7 +856,7 @@ The standard definitions are:
 The following graph shows the mean values across the five images. The red curve represents recall, and the dashed blue curve represents precision.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/04_gaussian_recall_precision_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/04_gaussian_recall_precision_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean recall and precision as Gaussian-noise intensity increases.</em></p>
@@ -878,7 +878,7 @@ The filter smooths sharp variations between neighboring pixels. However, it cann
 The following two graphs compare the distorted and enhanced images. In the recall graph, the red curve represents noisy inputs and the green curve represents Gaussian-blurred inputs. In the precision graph, the blue curve represents noisy inputs and the purple curve represents enhanced inputs.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/05_gaussian_blur_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/05_gaussian_blur_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Recall and precision before and after Gaussian-blur enhancement.</em></p>
@@ -898,7 +898,7 @@ The improvement in precision comes at the cost of lower recall. Gaussian blur ma
 A second exploratory test blended the noisy image with the fully filtered image at several alpha values, including the extreme `STD = 150` condition.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/06_alpha_blending_exploration_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/06_alpha_blending_exploration_clean.png" width="850">
 </p>
 
 <p align="center"><em>Alpha-blending exploration under extreme Gaussian noise.</em></p>
@@ -906,7 +906,7 @@ A second exploratory test blended the noisy image with the fully filtered image 
 The visual inspection shows that full filtering smooths the visible noise but may still leave or create positive detections that do not correspond reliably to the clean baseline.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/gaussian_noise_clean/07_gaussian_visual_inspection_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/gaussian_noise_clean/07_gaussian_visual_inspection_clean.png" width="750">
 </p>
 
 <p align="center"><em>Visual inspection of a fully blurred, heavily corrupted image.</em></p>
@@ -932,7 +932,7 @@ Each RGB image was converted to BGR, encoded in memory using `cv2.imencode`, dec
 ### 7.10.1 Visual Distortion Sweep
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>JPEG-compression sweep used for Mask R-CNN evaluation.</em></p>
@@ -942,7 +942,7 @@ At `Q = 50` and `Q = 30`, the visual change is relatively mild. At `Q = 15`, fin
 ### 7.10.2 Mask R-CNN under JPEG Compression
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/02_mask_rcnn_jpeg_results_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/02_mask_rcnn_jpeg_results_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Mask R-CNN predictions at different JPEG quality levels.</em></p>
@@ -958,7 +958,7 @@ The apparent increase from ten objects at `Q = 15` to twelve objects at `Q = 5` 
 As in the Gaussian-noise experiment, baseline and distorted bounding boxes were matched using `IoU > 0.5`. The red curve represents recall and the blue curve represents precision.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/03_jpeg_recall_precision_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/03_jpeg_recall_precision_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean Mask R-CNN recall and precision under JPEG compression.</em></p>
@@ -992,7 +992,7 @@ For every image and quality level, the experiment:
 7. Averaged recall and precision across the five images.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/04_bilateral_filter_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/04_bilateral_filter_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Recall and precision before and after bilateral filtering of JPEG-compressed images.</em></p>
@@ -1012,7 +1012,7 @@ Bilateral filtering is therefore useful only conditionally. At mild compression 
 The report also includes an exploratory blending experiment at `Q = 5`, ranging from the fully compressed image to the fully bilaterally filtered image.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/05_alpha_blending_exploration_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/05_alpha_blending_exploration_clean.png" width="850">
 </p>
 
 <p align="center"><em>Alpha-blending exploration for a severely JPEG-compressed image.</em></p>
@@ -1020,7 +1020,7 @@ The report also includes an exploratory blending experiment at `Q = 5`, ranging 
 The full-filter visual inspection shows that smoothing reduces block artifacts but may also spread regions and generate additional positive detections around strong edges.
 
 <p align="center">
-  <img src="images/task2_mask_rcnn/jpeg_clean/06_jpeg_visual_inspection_clean.png" width="750">
+  <img src="computer_vision_robustness_github_package/images/task2_mask_rcnn/jpeg_clean/06_jpeg_visual_inspection_clean.png" width="750">
 </p>
 
 <p align="center"><em>Visual inspection after full bilateral filtering at severe JPEG compression.</em></p>
@@ -1056,7 +1056,7 @@ MiDaS does **not** return metric distance in meters. It produces relative depth.
 The following figure presents the five clean images and their corresponding MiDaS depth maps.
 
 <p align="center">
-  <img src="images/task3_midas/baseline_clean/01_initial_midas_baseline_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/baseline_clean/01_initial_midas_baseline_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Initial MiDaS depth estimates on the five clean test images.</em></p>
@@ -1072,7 +1072,7 @@ To remove the influence of the ego vehicle, the upper `80%` of each image was de
 The minimum and maximum values used for depth normalization were also calculated only from the region of interest. This prevents the extreme near-camera values from compressing the useful depth range of the road scene.
 
 <p align="center">
-  <img src="images/task3_midas/baseline_clean/02_roi_corrected_baseline_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/baseline_clean/02_roi_corrected_baseline_clean.png" width="1000">
 </p>
 
 <p align="center"><em>ROI-corrected clean baseline with dynamic range calculated from the upper 80% of each image.</em></p>
@@ -1088,7 +1088,7 @@ A factor of `1.0` represents the original image. Smaller factors represent stron
 ### 8.4.1 Visual Distortion Sweep
 
 <p align="center">
-  <img src="images/task3_midas/low_light_clean/01_low_light_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/low_light_clean/01_low_light_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Gradual low-light sweep used for MiDaS evaluation.</em></p>
@@ -1100,7 +1100,7 @@ Unlike Gaussian noise, this transformation does not add random information. It a
 ### 8.4.2 Depth Maps under Low Light
 
 <p align="center">
-  <img src="images/task3_midas/low_light_clean/02_low_light_depth_maps_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/low_light_clean/02_low_light_depth_maps_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS depth maps under increasing low-light distortion.</em></p>
@@ -1120,7 +1120,7 @@ The depth difference was quantified using root mean squared error:
 A lower value indicates stronger agreement with the clean baseline.
 
 <p align="center">
-  <img src="images/task3_midas/low_light_clean/03_rmse_definition_clean.png" width="550">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/low_light_clean/03_rmse_definition_clean.png" width="550">
 </p>
 
 <p align="center"><em>RMSE definition used for depth-map comparison.</em></p>
@@ -1128,7 +1128,7 @@ A lower value indicates stronger agreement with the clean baseline.
 The following graph shows the mean RMSE as darkness increases.
 
 <p align="center">
-  <img src="images/task3_midas/low_light_clean/04_low_light_rmse_vs_snr_clean.png" width="850">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/low_light_clean/04_low_light_rmse_vs_snr_clean.png" width="850">
 </p>
 
 <p align="center"><em>Mean MiDaS depth error as the low-light SNR decreases.</em></p>
@@ -1153,7 +1153,7 @@ The color channels were preserved without direct equalization. MiDaS was then ru
 The following figure presents both comparisons. In the RMSE graph, the red curve represents the distorted images and the green curve represents CLAHE. In the SSIM graph, the blue curve represents the distorted images and the green curve represents CLAHE.
 
 <p align="center">
-  <img src="images/task3_midas/low_light_clean/05_clahe_rmse_ssim_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/low_light_clean/05_clahe_rmse_ssim_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>RMSE and SSIM before and after CLAHE under low-light conditions.</em></p>
@@ -1191,7 +1191,7 @@ The bottom `20%` of every image was masked to preserve the same region of intere
 ### 8.8.1 Visual Distortion Sweep
 
 <p align="center">
-  <img src="images/task3_midas/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/gaussian_noise_clean/01_gaussian_noise_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>Gaussian-noise sweep for the MiDaS experiment.</em></p>
@@ -1201,7 +1201,7 @@ At `sigma = 15`, the visual effect is moderate and the road geometry remains cle
 ### 8.8.2 Depth Maps under Gaussian Noise
 
 <p align="center">
-  <img src="images/task3_midas/gaussian_noise_clean/02_gaussian_noise_depth_maps_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/gaussian_noise_clean/02_gaussian_noise_depth_maps_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS depth maps under increasing Gaussian noise.</em></p>
@@ -1220,7 +1220,7 @@ The noisy depth maps were compared with the clean baseline within the upper `80%
 The following figure presents the mean values across the five test images. The red curve shows RMSE, and the blue curve shows SSIM.
 
 <p align="center">
-  <img src="images/task3_midas/gaussian_noise_clean/03_gaussian_rmse_ssim_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/gaussian_noise_clean/03_gaussian_rmse_ssim_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS depth degradation under Gaussian noise.</em></p>
@@ -1242,7 +1242,7 @@ A fixed random seed of `42` was used in the enhancement experiment to generate r
 For every noise level, MiDaS was run once on the noisy image and once after Gaussian blur. Both outputs were compared with the clean baseline using RMSE and SSIM.
 
 <p align="center">
-  <img src="images/task3_midas/gaussian_noise_clean/04_gaussian_blur_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/gaussian_noise_clean/04_gaussian_blur_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS RMSE and SSIM before and after Gaussian-blur denoising.</em></p>
@@ -1278,7 +1278,7 @@ The clean image was treated as quality `100`. The bottom `20%` of each image was
 ### 8.12.1 Visual Distortion Sweep
 
 <p align="center">
-  <img src="images/task3_midas/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/jpeg_clean/01_jpeg_distortion_sweep_clean.png" width="1000">
 </p>
 
 <p align="center"><em>JPEG-compression sweep for MiDaS evaluation.</em></p>
@@ -1290,7 +1290,7 @@ Unlike Gaussian noise, JPEG compression removes part of the original information
 ### 8.12.2 Depth Maps under JPEG Compression
 
 <p align="center">
-  <img src="images/task3_midas/jpeg_clean/02_jpeg_depth_maps_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/jpeg_clean/02_jpeg_depth_maps_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS depth maps at decreasing JPEG quality levels.</em></p>
@@ -1308,7 +1308,7 @@ The depth maps were compared within the upper `80%` ROI using RMSE and SSIM.
 The following figure presents both mean metrics. The red curve represents RMSE, and the blue curve represents SSIM.
 
 <p align="center">
-  <img src="images/task3_midas/jpeg_clean/03_jpeg_rmse_ssim_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/jpeg_clean/03_jpeg_rmse_ssim_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS depth degradation under JPEG compression.</em></p>
@@ -1326,7 +1326,7 @@ MiDaS therefore preserves global depth structure well under mild and moderate co
 A Gaussian blur with a `7 × 7` kernel and standard deviation `1.5` was applied before MiDaS inference. The purpose was to smooth artificial compression boundaries and reduce the influence of severe block artifacts.
 
 <p align="center">
-  <img src="images/task3_midas/jpeg_clean/04_gaussian_blur_comparison_clean.png" width="1000">
+  <img src="computer_vision_robustness_github_package/images/task3_midas/jpeg_clean/04_gaussian_blur_comparison_clean.png" width="1000">
 </p>
 
 <p align="center"><em>MiDaS RMSE and SSIM before and after Gaussian blur on JPEG-compressed images.</em></p>
