@@ -1,0 +1,8 @@
+FINAL GITHUB UPLOAD
+
+1. Open the repository root.
+2. Delete or replace the existing images folder with the images folder from this package.
+3. Replace the existing README.md with the README.md from this package.
+4. Commit with: Finalize report, figures, formulas, and fine-tuning results
+
+The README uses relative image paths and contains both formulas directly in GitHub-compatible LaTeX.
