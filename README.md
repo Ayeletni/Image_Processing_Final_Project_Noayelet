@@ -316,6 +316,36 @@ At this operating point:
 
 The improvement confirms that model-level adaptation provides the strongest and most stable solution for this experiment. Unlike external preprocessing, fine-tuning does not add an additional image-restoration stage during inference. Instead, the detector learns directly from examples of the target degradation.
 
+
+### 6.4.3 Per-Class Recall Recovery under Low Light
+
+To determine whether the recovery obtained by fine-tuning was distributed uniformly across object categories, we added a per-class analysis. For each class, the number of detections produced in a degraded condition was divided by the number detected in the corresponding clean baseline. The ratio was capped at `1.00`. This is therefore a **relative detection-count recovery measure** against the clean model output, rather than annotation-based recall.
+
+The first analysis used the original five-image control set at `b = -0.3`. The gray bars represent the clean baseline, the blue bars the original YOLOv8 model on dark images, the green bars the Gamma-plus-CLAHE pipeline, and the orange bars the fine-tuned model.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/low_light_5_images_b_minus_0_3.png" width="950">
+</p>
+
+<p align="center"><em>YOLOv8 per-class relative recall recovery on the five-image set under low light, b = -0.3.</em></p>
+
+The largest and most reliable classes in this small set were `car` (`n = 38`) and `person` (`n = 5`). For cars, the original and enhanced configurations recovered `0.63` and `0.58` of the clean detections, while fine-tuning increased recovery to `0.89`. For people, both the original and enhanced approaches remained at `0.40`, whereas the fine-tuned model reached `0.80`. These results show that domain adaptation improved the categories most directly affected by the loss of brightness and local contrast.
+
+The remaining categories contained only one to four clean detections. Their values therefore behave almost binarily: one recovered object can change the result from `0.00` to `1.00`. They are useful as qualitative examples but cannot support strong statistical conclusions by themselves.
+
+To obtain a more reliable class-level picture, the same evaluation was expanded to `300` randomly selected images at `b = -0.3`.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/low_light_300_images_b_minus_0_3.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded YOLOv8 per-class relative recall recovery under low light using 300 images.</em></p>
+
+The expanded set contained `1,784` car detections, `203` people, `193` traffic lights, `125` trucks, and `45` buses in the clean baseline. Fine-tuning restored car recovery from approximately `0.74` to `1.00`, person recovery from `0.55` to `0.71`, truck recovery from `0.71` to `1.00`, and bus recovery from `0.58` to `0.78`. It also recovered all six stop-sign detections.
+
+The improvement was not universal. Traffic-light recovery remained high for all approaches and was slightly lower for the fine-tuned model than for the original model. Train recovery also decreased from `1.00` to `0.62`. Conversely, the fine-tuned model recovered part of the bicycle class (`0.20`) when the original and enhanced approaches recovered none. The expanded analysis therefore confirms a strong gain for common road-user classes while also revealing a small class-dependent adaptation cost.
+
+
 ## 6.5 Low-Light Experiment Conclusion
 
 Low-light distortion significantly degrades YOLOv8 performance by weakening object boundaries, reducing confidence scores, eliminating detections, and occasionally causing incorrect classifications. Mild darkness produces limited degradation, but performance falls sharply after the SNR passes a critical knee point. Under near-total darkness, the model becomes unable to recover the baseline objects.
@@ -490,6 +520,32 @@ At this noise level:
 
 The bar chart confirms that external denoising offers only limited recovery, whereas training the detector on representative noisy data produces a major improvement without adding a preprocessing stage during inference.
 
+
+### 6.8.3 Per-Class Recall Recovery under Gaussian Noise
+
+A per-class recovery analysis was also performed at `STD = 60`. The five-image chart uses the clean class counts as the reference and compares the original noisy input, bilateral filtering, and the fine-tuned noise-robust YOLOv8 model.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/gaussian_noise_5_images_std_60.png" width="950">
+</p>
+
+<p align="center"><em>YOLOv8 per-class relative recall recovery on the five-image set under Gaussian noise, STD = 60.</em></p>
+
+Gaussian noise caused a severe collapse in the dominant categories. For cars (`n = 38`), the original model recovered only `0.16` of the clean detections. Bilateral filtering improved this to `0.32`, while fine-tuning restored the full clean count (`1.00`). For people (`n = 5`), the original and filtered models recovered no detections, whereas the fine-tuned model reached `0.80`. Traffic-light recovery improved from `0.25` to `1.00`. The small numbers in the remaining classes again produce unstable all-or-nothing values.
+
+The analysis was therefore repeated on `300` images under the same noise level.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/gaussian_noise_300_images_std_60.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded YOLOv8 per-class relative recall recovery under Gaussian noise using 300 images.</em></p>
+
+The larger experiment confirms that fine-tuning provides broad recovery in the central traffic classes. Car recovery increased from `0.34` for the original model and `0.47` after filtering to `1.00` after fine-tuning. Person recovery increased from `0.21` to `0.83`, traffic-light recovery from `0.38` to `0.82`, and bus recovery from `0.44` to `0.71`. Stop-sign recovery reached `1.00`, and strong gains were also observed for fire hydrants, benches, handbags, airplanes, and parking meters.
+
+The classical filter was not consistently beneficial. It improved several small-object categories but reduced recovery for trucks, trains, fire hydrants, benches, umbrellas, and parking meters. Fine-tuning also showed class-specific trade-offs: truck recovery remained below the original model, and train and umbrella recovery decreased. Nevertheless, the dominant result is that learning directly from noisy images produces substantially stronger recovery for the frequent road classes than fixed external smoothing.
+
+
 ## 6.9 Gaussian-Noise Experiment Conclusion
 
 Gaussian noise causes a gradual degradation in YOLOv8 performance. Mild noise mainly removes small and distant detections, while stronger noise reduces confidence, produces occasional misclassifications, and eventually causes complete detection failure.
@@ -647,6 +703,32 @@ The following grouped bar chart compares all three approaches at every tested qu
 <p align="center"><em>Grouped comparison of YOLOv8 robustness across JPEG quality levels.</em></p>
 
 The chart confirms that bilateral filtering produces only local improvements, whereas fine-tuning consistently preserves a substantially larger fraction of clean-image detections. Model adaptation is therefore the most reliable solution for severe and variable compression.
+
+
+### 6.12.3 Per-Class Recall Recovery under JPEG Compression
+
+The JPEG fine-tuning experiment was supplemented with per-class recovery at the severe compression level `Q = 8`. The first chart presents the five-image control set.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/jpeg_5_images_q8.png" width="950">
+</p>
+
+<p align="center"><em>YOLOv8 per-class relative recall recovery on the five-image set under JPEG compression, Q = 8.</em></p>
+
+The strongest degradation appears in the car class (`n = 38`). The original model recovered only `0.16` of the clean detections, and de-blocking improved the result only slightly to `0.18`. The fine-tuned model recovered `0.89`. Person recovery remained at `0.20` for all three approaches, showing that some small or distant pedestrians in this specific sample had already lost too much useful detail. Traffic lights and trucks remained comparatively stable, although the fine-tuned traffic-light result decreased to `0.75`.
+
+Because several classes contained only one object, the experiment was expanded to `300` images at the same compression level.
+
+<p align="center">
+  <img src="images/task1_yolov8/per_class/jpeg_300_images_q8.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded YOLOv8 per-class relative recall recovery under JPEG compression using 300 images.</em></p>
+
+The expanded graph demonstrates near-complete recovery in the two largest categories. For `1,784` cars, the original model recovered `0.66`, de-blocking reached `0.76`, and fine-tuning restored `1.00`. For `203` people, recovery increased from `0.65` to `1.00`. The fine-tuned model also restored the full clean count for buses, stop signs, and bicycles.
+
+The bicycle result is particularly informative. The original model retained `0.60`, while the de-blocking filter reduced recovery to `0.20`, most likely because smoothing removed thin structures that remained informative. Fine-tuning reached `1.00` without externally blurring the image. The gains were not uniform: traffic lights, trucks, and trains remained slightly below their strongest non-fine-tuned results. Overall, the class-level analysis supports the conclusion that JPEG-specific training is especially effective for common vehicles and vulnerable fine-structure classes.
+
 
 ## 6.13 Task 1 Conclusion
 
@@ -836,7 +918,37 @@ At the severe levels `b = -0.7` and `b = -0.8`, the original and enhanced models
 
 The enhanced curve remains close to the original curve throughout most of the experiment. Gamma correction and CLAHE can restore visible contrast, but they also alter local boundaries and amplify unnatural texture. These changes are especially problematic for a model that depends on precise region localization and mask boundaries.
 
-### 7.5.3 Low-Light Fine-Tuning Conclusion
+
+### 7.5.3 Per-Class Recall Recovery under Low Light
+
+We next examined whether Mask R-CNN's low-light recovery was consistent across object categories. The class metric was computed as the number of detections in each evaluated condition divided by the number produced by the original model on the clean images, capped at `1.00`. The same confidence threshold (`0.25`), NMS threshold (`IoU = 0.3`), and ego-vehicle exclusion were used throughout.
+
+The five-image experiment was generated by the code with **extreme darkness `b = -0.8`**. The original model on dark images is shown in blue, Gamma-plus-CLAHE in green, and the fine-tuned Mask R-CNN model in orange.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/low_light_5_images_b_minus_0_3.png" width="950">
+</p>
+
+<p align="center"><em>Mask R-CNN per-class relative recall recovery on five images under low light, b = -0.3.</em></p>
+
+The extreme attenuation caused an almost complete loss of the common classes. Car recovery fell to `0.06` for the original model and `0.09` after CLAHE, while fine-tuning raised it to `0.80`. Traffic-light recovery increased from `0.18` and `0.29` to `0.76`. For trucks, the original and enhanced configurations recovered no detections, whereas the fine-tuned model reached `0.67`.
+
+The gain was not universal. Person recovery remained only `0.06` for the original and fine-tuned models, while CLAHE reached `0.12`. This indicates that the adaptation learned strong low-light features for several vehicle-related classes but did not recover every small or weakly contrasted object. The remaining classes contained only one or two baseline detections and therefore cannot support reliable statistical conclusions.
+
+The expanded experiment used `300` images at the less extreme but still challenging level `b = -0.3`.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/low_light_300_images_b_minus_0_3.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded Mask R-CNN per-class relative recall recovery under low light, b = -0.3.</em></p>
+
+With `2,879` cars, `671` traffic lights, `578` people, `207` trucks, and `54` buses, the expanded graph provides a much stronger statistical basis. Fine-tuning restored car recovery to `1.00`, traffic lights to `0.98`, people to `1.00`, buses to `0.96`, and stop signs to `1.00`. It also produced a large gain for fire hydrants, from `0.32` to `0.84`.
+
+The results also reveal class-dependent trade-offs. CLAHE was better than fine-tuning for trucks, potted plants, benches, parking meters, bicycles, backpacks, airplanes, motorcycles, and chairs. In particular, bench recovery fell from `0.95` for the original model to `0.29` after fine-tuning. These minority categories contain fewer examples and are more sensitive to individual detections, but they show that adaptation does not improve every class uniformly. The main conclusion is therefore a strong robustness gain for the central driving classes, accompanied by losses in several less frequent categories.
+
+
+### 7.5.4 Low-Light Fine-Tuning Conclusion
 
 Teacher-Student fine-tuning is the most effective strategy under moderate and severe darkness. The adapted model learns internal representations that are less dependent on clean color and high-contrast edges, allowing it to detect objects directly from degraded inputs. The mixed clean/dark training strategy reduces, but does not completely remove, the mild-domain performance penalty. A practical system could therefore use the original model in normal lighting and activate the specialized model when illumination falls below a detected threshold.
 
@@ -995,7 +1107,33 @@ At `STD = 150`, the original model achieves recall `0.06` and precision `0.31`. 
 
 The adapted network therefore recovers five times as many baseline objects as the original model and produces a substantially more reliable prediction set. Although the result remains below the clean baseline, direct model adaptation is clearly more effective than attempting to remove extreme noise using a fixed low-pass filter.
 
-### 7.9.4 Gaussian-Noise Fine-Tuning Conclusion
+
+### 7.9.4 Per-Class Recall Recovery under Gaussian Noise
+
+The first class-level Gaussian-noise experiment used the five control images at the value actually executed by the code, **`STD = 150`**. This is more severe than the `STD = 60` used in the expanded experiment.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/gaussian_noise_5_images_std_60.png" width="950">
+</p>
+
+<p align="center"><em>Mask R-CNN per-class relative recall recovery on five images under Gaussian noise, STD = 60.</em></p>
+
+Under this extreme noise, the original car recovery was `0.36`, Gaussian blur reduced it to `0.23`, and fine-tuning restored the full clean count (`1.00`). Traffic-light recovery increased from `0.12` for the original model to `0.41` after fine-tuning. Person recovery increased from `0.24` to `0.47`, and truck recovery increased from `0.33` to `1.00`. Gaussian blur helped people and stop signs but was harmful for cars and did not provide a consistent recovery pattern.
+
+To obtain a statistically broader comparison, `300` images were evaluated at `STD = 60`.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/gaussian_noise_300_images_std_60.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded Mask R-CNN per-class relative recall recovery under Gaussian noise, STD = 60.</em></p>
+
+For the largest categories, fine-tuning produced substantial recovery. Car recall increased from `0.84` for the original model and `0.60` after blur to `1.00`. Traffic lights increased from approximately `0.40` to `0.93`, people from `0.80` to `1.00`, and fire hydrants from `0.59` to `1.00`. Strong improvements were also observed for stop signs, benches, handbags, airplanes, and parking meters.
+
+The larger graph also exposes important exceptions. Fine-tuning reduced bus recovery from `0.78` to `0.47`, train recovery from `0.89` to `0.22`, umbrella recovery from `1.00` to `0.25`, and skateboard recovery from `0.80` to `0.40`. Gaussian blur was strongest for several thin or uncommon classes, including motorcycles and dogs. The class-level conclusion is therefore more precise than the overall mean: noise-specific fine-tuning is highly effective for frequent road classes, but it creates a measurable category-dependent trade-off.
+
+
+### 7.9.5 Gaussian-Noise Fine-Tuning Conclusion
 
 Fine-tuning on a mixed clean/noisy dataset substantially improves Mask R-CNN robustness as noise intensity increases. Gaussian blur is not consistently beneficial because it removes high-frequency noise and genuine object boundaries together. The fine-tuned model instead learns features that are less sensitive to pixel-level fluctuations and delays the collapse in both recall and precision.
 
@@ -1155,7 +1293,33 @@ At `Q = 5`, the original model achieves recall `0.32` and precision `0.77`. Bila
 
 This result demonstrates a genuine engineering trade-off. Fine-tuning more than halves the missed-object rate relative to the original model, but it also returns additional uncertain or less accurately localized predictions. In applications where failing to detect a road user is especially costly, the recall gain may justify this precision reduction. Confidence-threshold and NMS calibration could be used to recover a more favorable operating point.
 
-### 7.13.4 JPEG Fine-Tuning Conclusion
+
+### 7.13.4 Per-Class Recall Recovery under JPEG Compression
+
+The five-image per-class JPEG experiment was evaluated at **`Q = 15`**.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/jpeg_5_images_q15.png" width="950">
+</p>
+
+<p align="center"><em>Mask R-CNN per-class relative recall recovery on five images under JPEG compression, Q = 15.</em></p>
+
+Car recovery fell to `0.12` for the original model and `0.19` after bilateral filtering, while the fine-tuned model reached `0.75`. Person recovery increased from `0.24` and `0.29` to `1.00`. Traffic lights remained highly recoverable even after compression, and the fine-tuned model reached `1.00`. Trucks were fully retained by all approaches, while the fine-tuned model uniquely recovered the single bus detection.
+
+As in the other five-image analyses, rare classes produce unstable binary values. The evaluation was therefore expanded to `300` images at the moderate-to-severe level `Q = 15`.
+
+<p align="center">
+  <img src="images/task2_mask_rcnn/per_class/jpeg_300_images_q15.png" width="1100">
+</p>
+
+<p align="center"><em>Expanded Mask R-CNN per-class relative recall recovery under JPEG compression, Q = 15.</em></p>
+
+Fine-tuning preserved high recovery in the major classes: cars increased from `0.82` to `0.97`, traffic lights from `0.90` to `1.00`, trucks remained near `1.00`, buses reached `1.00`, and fire hydrants increased from `0.73` to `1.00`. Motorcycle recovery also improved to `0.91`.
+
+The strongest method varied by class. Bilateral filtering reached `1.00` for people, benches, umbrellas, airplanes, parking meters, boats, and skateboards. Fine-tuning was weaker for several of these categories, including trains (`0.22`), airplanes (`0.12`), boats (`0.43`), skateboards (`0.20`), and dogs (`0.25`). This result shows that JPEG-specific adaptation provides strong protection for the central traffic classes but does not uniformly preserve all COCO categories. The expanded per-class analysis therefore complements the global recall-precision curves by revealing where the additional sensitivity is gained and where it is lost.
+
+
+### 7.13.5 JPEG Fine-Tuning Conclusion
 
 Mask R-CNN is relatively robust to mild JPEG compression, and neither filtering nor fine-tuning is necessary in that range. Under severe compression, however, fine-tuning provides the strongest recall and delays the model's collapse. Bilateral filtering offers an intermediate solution, but both approaches require careful consideration of the recall-precision balance.
 
